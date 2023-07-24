@@ -5,51 +5,30 @@
 
 typedef float dataT;
 
-class Matrix{
-	private:
-		dataT* pMatrix;
-		int rows;
-		int cols;
+struct Matrix{
+	int rows;
+	int cols;
+	*dataT start;
+}
 
-	public:
-	
-		Matrix(int r, int c);
-		~Matrix();
+// Init functions
 
-		dataT getItem(int ri, int ci);
-		bool setItem(int ri, int ci, dataT item);
-		int getRows();
-		int getCols();
-};
+void MATRIX_MEMORY_ALLOCATE();
+void MATRIX_DESTROY();
+
+// Mathematical functions
+void MATRIX_DOT(Matrix D, Matrix A, Matrix B);
+void MATRIX_ADD(Matrix D, Matrix A, Matrix B);
+
+// Miscellaneous functions
+void MATRIX_PRINT();
+bool MATRIX_SET_ITEM_AT(Matrix M, dataT item);
+dataT MATRIX_GET_ITEM_AT(Matrix M, int rows, int cols);
 
 #endif // NEURAL_H
 
 #ifdef NEURAL_IMPLEMENTATIONS
 #define NEURAL_IMPLEMENTATIONS
-
-Matrix::Matrix(const int r, const int c){
-	pMatrix = new dataT[r][c];
-}
-
-dataT Matrix::getItem(int ri, int ci){
-	return *pMatrix[ri][ci];	
-}
-
-bool Matrix::setItem(int ri, int ci, dataT item){
-	if(ri + 1 > rows){
-		return false;
-	}
-
-	if(ci + 1 > cols){
-		return false;
-	}
-	*pMatrix[ri][ci] = item;
-	return true;
-}
-
-Matrix::~Matrix(){
-	delete pMatrix;
-}
 
 
 #endif // NEURAL_IMPLEMENTATIONS
