@@ -37,6 +37,7 @@ namespace NMatrix{
 	// Mathematical functions
 	void DOT(Matrix* D, Matrix* A, Matrix* B);
 	void ADD(Matrix* D, Matrix* A, Matrix* B);
+	void TRANSPOSE(Matrix* M);
 
 	// Miscellaneous functions
 	void PRINT(Matrix* M);
@@ -137,6 +138,26 @@ namespace NMatrix{
 			}
 		}
 
+	}
+	
+	void TRANSPOSE(Matrix* M){
+		assert(M->rows != 0);
+		assert(M->cols != 0);
+		assert(M->start != nullptr);
+
+		Matrix D = {.rows = M->cols, .cols = M->rows};
+		MEMORY_ALLOC(&D);
+
+		for(int i=0; i<M->rows; i++){
+			for(int j=0; j<M->cols; j++){
+				D.start[j*D.cols + i] = M->start[i*M->cols + j];
+			}
+		}
+
+		MEMORY_DEALLOC(M);
+		M->rows = D.rows;
+		M->cols = D.cols;
+		M->start = D.start;
 	}
 
 

@@ -7,11 +7,15 @@ using namespace NMatrix;
 int main(){
 	srand(time(0));
 
-	Matrix M = {.rows = 5, .cols = 5};
+	Matrix M = {.rows = 2, .cols = 4};
 
 	MEMORY_ALLOC(&M);
 
 	RANDOMIZE(&M);
+	PRINT(&M);
+
+	cout << "----------------------" << endl;
+	TRANSPOSE(&M);
 	PRINT(&M);
 
 	MEMORY_DEALLOC(&M);
